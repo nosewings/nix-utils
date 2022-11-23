@@ -6,7 +6,7 @@
   };
 
   outputs = { self, nixpkgs }: let
-    inherit (nixpkgs.lib) elemAt filterAttrs length;
+    inherit (nixpkgs.lib) elemAt filterAttrs genList length min;
   in {
     removeAttr = set: x: removeAttrs set [ x ];
     mapAccumL = f: e: xs: let
@@ -18,5 +18,6 @@
           p = f state (elemAt xs n);
         in go (results ++ [ p.result ]) p.state (n + 1);
     in go [ ] e 0;
+    zipWith = f: xs: ys: genList (i: f (elemAt xs i) (elemAt ys i)) (min (length xs) (length ys));
   };
 }
