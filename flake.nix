@@ -8,7 +8,7 @@
   outputs = { self, nixpkgs }: let
     inherit (nixpkgs.lib) elemAt filterAttrs length;
   in {
-    removeKey = set: x: removeAttrs set [ x ];
+    removeAttr = set: x: removeAttrs set [ x ];
     mapAccumL = f: e: xs: let
       stop = builtins.length xs;
       go = results: state: n:
