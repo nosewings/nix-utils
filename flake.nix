@@ -8,6 +8,7 @@
   outputs = { self, nixpkgs }: let
     inherit (nixpkgs.lib) elemAt filterAttrs genList length min;
   in {
+    isNull = x: x != null;
     mapAccumL = f: e: xs: let
       stop = builtins.length xs;
       go = results: state: n:
