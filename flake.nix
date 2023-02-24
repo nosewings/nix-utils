@@ -6,8 +6,9 @@
   };
 
   outputs = { self, nixpkgs }: let
-    inherit (nixpkgs.lib) elemAt filterAttrs genList length min;
+    inherit (nixpkgs.lib) elemAt filterAttrs foldl' genList length min;
   in {
+    concatAttrs = foldl' (e: x: e // x) { };
     isNull = x: x != null;
     mapAccumL = f: e: xs: let
       stop = builtins.length xs;
